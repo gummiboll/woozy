@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gummiboll/woozy.svg?branch=master)](https://travis-ci.org/gummiboll/woozy)
+
 # woozy
 
 Dead simple yr.no weather cli tool, hacked together for the hay harvest of 2015
