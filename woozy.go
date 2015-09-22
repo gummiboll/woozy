@@ -70,7 +70,7 @@ func printFooter(wd weatherdata.WeatherData) {
 func printForecast(wd weatherdata.WeatherData, days int) {
 	forecasts := make(map[string][]weatherdata.WeatherForecast)
 	for i := range wd.Forecast {
-		forecasts[wd.Forecast[i].From.Format("02/01")] = append(forecasts[wd.Forecast[i].From.Format("02/01")], wd.Forecast[i])
+		forecasts[wd.Forecast[i].From.Format("0102")] = append(forecasts[wd.Forecast[i].From.Format("0102")], wd.Forecast[i])
 	}
 
 	mk := make([]string, len(forecasts))
@@ -79,6 +79,7 @@ func printForecast(wd weatherdata.WeatherData, days int) {
 		mk[i] = k
 		i++
 	}
+
 	sort.Strings(mk)
 
 	for i := 0; i < days; i++ {
