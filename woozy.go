@@ -70,7 +70,8 @@ func printFooter(wd weatherdata.WeatherData) {
 func printForecast(wd weatherdata.WeatherData, days int) {
 	forecasts := make(map[string][]weatherdata.WeatherForecast)
 	for i := range wd.Forecast {
-		forecasts[wd.Forecast[i].From.Format("0102")] = append(forecasts[wd.Forecast[i].From.Format("0102")], wd.Forecast[i])
+		// Should maybe be typecasted to int?
+		forecasts[wd.Forecast[i].From.Format("20060102")] = append(forecasts[wd.Forecast[i].From.Format("20060102")], wd.Forecast[i])
 	}
 
 	mk := make([]string, len(forecasts))
