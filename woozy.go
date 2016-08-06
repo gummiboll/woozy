@@ -21,15 +21,25 @@ type Configuration struct {
 
 var (
 	icons = map[string]string{
-		"Rain":               "\u2602",
-		"Light rain":         "\u2602",
-		"Light rain showers": "\u2602",
-		"Heavy rain":         "\u2602",
-		"Rain showers":       "\u2602",
-		"Clear sky":          "\u263C",
-		"Cloudy":             "\u2601",
-		"Partly cloudy":      "\u26C5",
-		"Fair":               "\u26C5",
+		"Rain":                           "\U0001f327",
+		"Snow":                           "\U0001f328",
+		"Rain and thunder":               "\u26C8",
+		"Light rain":                     "\U0001f326",
+		"Light snow":                     "\U0001f328",
+		"Light rain and thunder":         "\u26C8",
+		"Light rain showers":             "\U0001f326",
+		"Light rain showers and thunder": "\u26C8",
+		"Light snow showers":             "\U0001f328",
+		"Heavy rain":                     "\U0001f327",
+		"Heavy rain and thunder":         "\u26C8",
+		"Heavy snow":                     "\U0001f328",
+		"Rain showers":                   "\U0001f326",
+		"Rain showers and thunder":       "\u26C8",
+		"Snow showers":                   "\U0001f328",
+		"Clear sky":                      "\u263C",
+		"Cloudy":                         "\u2601",
+		"Partly cloudy":                  "\u26C5",
+		"Fair":                           "\u26C5",
 	}
 
 	windIcons = map[string]string{
