@@ -115,7 +115,7 @@ func getConfigurationFileName() (string, error) {
 	return cfile, nil
 }
 
-func createDefaultConfiguration(cfile string, cnf Configuration) (error) {
+func createDefaultConfiguration(cfile string, cnf Configuration) error {
 	fmt.Println(fmt.Sprintf("Configuration file not found, creating a example in %s..", cfile))
 	out, err := os.Create(cfile)
 	if err != nil {
