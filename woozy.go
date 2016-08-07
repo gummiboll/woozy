@@ -68,7 +68,7 @@ var (
 
 func printHeader(wd weatherdata.WeatherData) {
 	hStr := fmt.Sprintf("%s / %s", wd.Location.Country, wd.Location.Name)
-	hStr = fmt.Sprintf("%s | %s %s %s %s %s (%.1f hours)", hStr, icons["Clear sky"], windIcons["S"], wd.Sun.Rise.Local().Format("15:04"), windIcons["N"], wd.Sun.Set.Local().Format("15:04"), wd.SunHours())
+	hStr = fmt.Sprintf("%s | %s %s %s %s %s (%.1f hours)\n", hStr, icons["Clear sky"], windIcons["S"], wd.Sun.Rise.Local().Format("15:04"), windIcons["N"], wd.Sun.Set.Local().Format("15:04"), wd.SunHours())
 	fmt.Println(hStr)
 }
 
@@ -97,8 +97,8 @@ func printForecast(wd weatherdata.WeatherData, days int) {
 		var wStr string
 		fmt.Println(forecasts[mk[i]][0].From.Format("January 02 (Monday):"))
 		for _, w := range forecasts[mk[i]] {
-			wStr = fmt.Sprintf(" %s %s %d%s (%.1fmm)", w.PeriodName(), icons[w.Symbol.Name], w.Temperature.Value, "\u2103", w.Precipitation.Value)
-			wStr = fmt.Sprintf("%s %s %.1f m/s", wStr, windIcons[w.WindDirection.Code], w.WindSpeed.Mps)
+			wStr = fmt.Sprintf(" %s %s    \U0001f321 %d%s    \u2602  %.1fmm", w.PeriodName(), icons[w.Symbol.Name], w.Temperature.Value, "\u2103", w.Precipitation.Value)
+			wStr = fmt.Sprintf("%s    \U0001f32C  %.1f m/s %s", wStr, w.WindSpeed.Mps, windIcons[w.WindDirection.Code])
 			fmt.Println(wStr)
 		}
 		fmt.Println("")
