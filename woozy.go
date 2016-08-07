@@ -105,30 +105,46 @@ func printForecast(wd weatherdata.WeatherData, days int) {
 	}
 }
 
+func getConfigurationFileName() (string, error) {
+	usr, err := user.Current()
+	if err != nil {
+		return "", err
+	}
+
+	cfile := path.Join(usr.HomeDir, ".woozy")
+	return cfile, nil
+}
+
+func createDefaultConfiguration(cfile string, cnf Configuration) (error) {
+	fmt.Println(fmt.Sprintf("Configuration file not found, creating a example in %s..", cfile))
+	out, err := os.Create(cfile)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	cnf.Place = "Sweden/Västerbotten/Estersmark"
+	cnf.Days = 3
+	configjson, err := json.MarshalIndent(cnf, "", "\t")
+	ioutil.WriteFile(cfile, configjson, 0600)
+	fmt.Println(".. edit it and restart woozy")
+	os.Exit(1)
+	return nil
+}
+
 func loadConfig() (Configuration, error) {
 	configuration := Configuration{}
 
-	usr, err := user.Current()
+	cfile, err := getConfigurationFileName()
 	if err != nil {
 		return configuration, err
 	}
 
-	cfile := path.Join(usr.HomeDir, ".woozy")
-
 	file, err := os.Open(cfile)
 	if err != nil {
-		fmt.Println(fmt.Sprintf("Configuration file not found, creating a example in %s..", cfile))
-		out, err := os.Create(cfile)
-		if err != nil {
-			panic(err)
+		cerr := createDefaultConfiguration(cfile, configuration)
+		if cerr != nil {
+			return configuration, cerr
 		}
-		defer out.Close()
-		configuration.Place = "Sweden/Västerbotten/Estersmark"
-		configuration.Days = 3
-		configjson, err := json.MarshalIndent(configuration, "", "\t")
-		ioutil.WriteFile(cfile, configjson, 0600)
-		fmt.Println(".. edit it and restart woozy")
-		os.Exit(1)
 	}
 
 	decoder := json.NewDecoder(file)
