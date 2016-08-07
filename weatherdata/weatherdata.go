@@ -193,6 +193,10 @@ func fillWeatherDataCache(place string) (err error) {
 		return err
 	}
 
+	if resp.StatusCode != 200 {
+		return errors.New("Failed to load forecast from yr.no")
+	}
+
 	defer resp.Body.Close()
 	out, err := os.Create(cacheFile)
 	if err != nil {

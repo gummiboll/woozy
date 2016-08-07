@@ -163,7 +163,8 @@ func main() {
 	configuration, err := loadConfig()
 
 	if err != nil {
-		panic(err)
+		fmt.Println("Failed to load/create configuration:", err)
+		os.Exit(1)
 	}
 
 	cc := flag.Bool("cache-clear", false, "Force cache clear")
@@ -172,7 +173,8 @@ func main() {
 
 	wd, err := weatherdata.LoadWeatherData(configuration.Place, *cc)
 	if err != nil {
-		panic(err)
+		fmt.Println(fmt.Sprintf("Failed to load weather for %s: %s", configuration.Place, err))
+		os.Exit(1)
 	}
 
 	if configuration.Days == 0 {
