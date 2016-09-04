@@ -180,7 +180,9 @@ func weatherDataCache(cc bool, assumeValid bool) (wd WeatherData, valid bool) {
 }
 
 func fillWeatherDataCache(place string) (err error) {
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 20 * time.Second,
+	}
 	req, err := http.NewRequest("GET", yrURL(place), nil)
 	if err != nil {
 		return err
